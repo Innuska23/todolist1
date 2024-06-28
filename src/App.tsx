@@ -14,6 +14,7 @@ function App() {
     { id: uuidv4(), title: 'React', isDone: false },
     { id: uuidv4(), title: 'TS', isDone: false }
   ]);
+
   let [filter, setFilter] = useState<FilterValuesType>('all');
 
   function removeTask(id: string) {
@@ -21,8 +22,26 @@ function App() {
     setTasks(filteredTasks);
   }
 
+  function addTask(title: string) {
+    let newTask = {
+      id: uuidv4(),
+      title: title,
+      isDone: false
+    }
+    let newTasks = [newTask, ...tasks]
+    setTasks(newTasks);
+  }
+
   function changeFilter(value: FilterValuesType) {
     setFilter(value);
+  }
+
+  function changeStatus(taskId: string, isDone: boolean) {
+    let task = tasks.find(t => t.id === taskId);
+    if (task) {
+      task.isDone = isDone;
+    }
+    setTasks(tasks);
   }
 
   let tasksForTodoList = tasks;
@@ -40,7 +59,9 @@ function App() {
         title="What to learn"
         tasks={tasksForTodoList}
         removeTask={removeTask}
-        changeFilter={changeFilter} />
+        changeFilter={changeFilter}
+        addTask={addTask}
+      />
     </div>
   )
 }
