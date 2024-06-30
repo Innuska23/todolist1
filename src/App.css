@@ -1,12 +1,28 @@
 .App {
-  padding: 30px;
+    padding: 30px;
 }
 
 App > div {
-  margin-right: 50px;
+    margin-right: 50px;
 }
 
 .ul li {
-  list-style: none;
-  text-decoration: none;
+    list-style: none;
+    text-decoration: none;
+}
+
+.error {
+    border: red 1px solid;
+}
+
+.error-message {
+    color: red;
+}
+
+.active-filter {
+    background-color: aquamarine;
+}
+
+.is-done {
+    opacity: 0.5;
 }
