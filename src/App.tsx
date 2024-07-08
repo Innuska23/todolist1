@@ -16,7 +16,7 @@ export type TodoListType = {
   filter: FilterValuesType
 }
 
-type TaskStateType = {
+export type TaskStateType = {
   [key: string]: Array<TaskType>
 }
 

@@ -2,14 +2,15 @@ import { FilterValuesType, TodoListType } from "../App"
 
 import { v4 as uuidv4 } from 'uuid';
 
-type RemoveTodoListActionType = {
+export type RemoveTodoListActionType = {
     type: 'REMOVE-TODOLIST',
     id: string
 }
 
-type AddTodoListActionType = {
+export type AddTodoListActionType = {
     type: 'ADD-TODOLIST',
     title: string
+    todoListId: string
 }
 
 type ChangeTodoListTitleActionType = {
@@ -34,7 +35,7 @@ export const todoListsReducer = (state: Array<TodoListType>, action: ActionsType
 
         case 'ADD-TODOLIST': {
             return [...state, {
-                id: uuidv4(),
+                id: action.todoListId,
                 title: action.title,
                 filter: 'all'
             }]
@@ -55,23 +56,24 @@ export const todoListsReducer = (state: Array<TodoListType>, action: ActionsType
             return [...state]
         }
 
+
         default:
             throw new Error('I don`t understand this action type')
     }
 }
 
-export const RemoveTodoListAC = (todoListId: string): RemoveTodoListActionType => {
+export const removeTodoListAC = (todoListId: string): RemoveTodoListActionType => {
     return { type: "REMOVE-TODOLIST", id: todoListId }
 }
 
-export const AddTodoListAC = (title: string): AddTodoListActionType => {
-    return { type: "ADD-TODOLIST", title: title }
+export const addTodoListAC = (title: string): AddTodoListActionType => {
+    return { type: "ADD-TODOLIST", title, todoListId: uuidv4() }
 }
 
-export const ChangeTodoListTitleAC = (id: string, title: string): ChangeTodoListTitleActionType => {
+export const changeTodoListTitleAC = (id: string, title: string): ChangeTodoListTitleActionType => {
     return { type: "CHANGE-TODOLIST-TYPE", id: id, title: title }
 }
 
-export const ChangeTodoListFilterAC = (id: string, filter: FilterValuesType): ChangeTodoListFilterActionType => {
+export const changeTodoListFilterAC = (id: string, filter: FilterValuesType): ChangeTodoListFilterActionType => {
     return { type: "CHANGE-TODOLIST-FILTER", id: id, filter: filter }
 } 
